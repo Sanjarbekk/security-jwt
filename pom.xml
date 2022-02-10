@@ -79,6 +79,18 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!--Security-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>30.1.1-jre</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -100,7 +112,6 @@
                             <artifactId>mapstruct-processor</artifactId>
                             <version>1.4.2.Final</version>
                         </path>
-                        <!-- other annotation processors -->
                         <path>
                                 <groupId>org.projectlombok</groupId>
                                 <artifactId>lombok</artifactId>
