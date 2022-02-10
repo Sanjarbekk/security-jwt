@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import paybek.uz.demo.domain.Student;
 import paybek.uz.demo.service.StudentService;
+import paybek.uz.demo.service.dto.StudentDTO;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -24,18 +25,18 @@ public class StudentController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Student> createStudent(@Valid @RequestBody Student student) {
-        log.debug("Rest request to save Student : {}", student);
-        Student result = studentService.save(student);
+    public ResponseEntity<StudentDTO> createStudent(@Valid @RequestBody StudentDTO studentDTO) {
+        log.debug("Rest request to save Student : {}", studentDTO);
+        StudentDTO result = studentService.save(studentDTO);
         return ResponseEntity.ok()
                 .body(result);
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<Student>> getAllStudent() {
+    public ResponseEntity<List<StudentDTO>> getAllStudent() {
         log.debug("Rest request get all Students");
         try {
-            List<Student> studentList = new ArrayList<>();
+            List<StudentDTO> studentList = new ArrayList<>();
             studentList = studentService.getAllStudent();
             return new ResponseEntity<>(studentList, HttpStatus.OK);
         } catch(Exception e) {
@@ -44,13 +45,13 @@ public class StudentController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Student> updateStudent(@Valid @RequestBody Student student) {
-        log.debug("Rest request to update Student : {}", student);
-        Student result;
-        if (student.getId() != null)
-            result = studentService.update(student);
+    public ResponseEntity<StudentDTO> updateStudent(@Valid @RequestBody StudentDTO studentDTO) {
+        log.debug("Rest request to update Student : {}", studentDTO);
+        StudentDTO result;
+        if (studentDTO.getId() != null)
+            result = studentService.update(studentDTO);
         else
-            result = studentService.save(student);
+            result = studentService.save(studentDTO);
         return ResponseEntity.ok()
                 .body(result);
     }

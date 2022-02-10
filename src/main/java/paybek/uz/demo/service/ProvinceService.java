@@ -7,6 +7,7 @@ import paybek.uz.demo.domain.Province;
 import paybek.uz.demo.domain.Student;
 import paybek.uz.demo.repository.ProvinceRepository;
 import paybek.uz.demo.service.dto.ProvinceDTO;
+import paybek.uz.demo.service.dto.StudentDTO;
 import paybek.uz.demo.service.mapper.ProvinceMapper;
 
 import javax.transaction.Transactional;
@@ -59,8 +60,8 @@ public class ProvinceService {
     }
 
     private boolean checkProvince(long id) {
-        List<Student> getAllStudent = studentService.getAllStudent();
-        for(Student student: getAllStudent) {
+        List<StudentDTO> getAllStudent = studentService.getAllStudent();
+        for(StudentDTO student: getAllStudent) {
             //Province province = student.getProvince();
            // if(province.getId() == id)
                 return true;

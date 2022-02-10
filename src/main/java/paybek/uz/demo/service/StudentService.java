@@ -5,9 +5,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import paybek.uz.demo.domain.Student;
 import paybek.uz.demo.repository.StudentRepository;
+import paybek.uz.demo.service.dto.StudentDTO;
+import paybek.uz.demo.service.mapper.StudentMapper;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -17,23 +20,29 @@ public class StudentService {
 
     private final StudentRepository studentRepository;
 
-    public StudentService(StudentRepository studentRepository) {
+    private final StudentMapper studentMapper;
+
+    public StudentService(StudentRepository studentRepository, StudentMapper studentMapper) {
         this.studentRepository = studentRepository;
+        this.studentMapper = studentMapper;
     }
 
-    public Student save(Student student) {
-        log.debug("Request to save Student : {}", student);
-        return studentRepository.save(student);
+    public StudentDTO save(StudentDTO studentDTO) {
+        log.debug("Request to save Student : {}", studentDTO);
+        Student student = studentMapper.toEntity(studentDTO);
+        student = studentRepository.save(student);
+        return studentMapper.toDto(student);
     }
 
-    public List<Student> getAllStudent() {
+    public List<StudentDTO> getAllStudent() {
         log.debug("Get All student");
-        return studentRepository.findAll();
+        return studentRepository.findAll().stream()
+                .map(studentMapper::toDto)
+                .collect(Collectors.toList());
     }
 
-    public Student update(Student student) {
-        log.debug("Update this student id : {}, name : {}", student.getId(), student.getFirstName());
-        return studentRepository.save(student);
+    public StudentDTO update(StudentDTO studentDTO) {
+        return save(studentDTO);
     }
 
     public void delete(long id) {
