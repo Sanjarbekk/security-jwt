@@ -62,8 +62,7 @@ public class ProvinceService {
     private boolean checkProvince(long id) {
         List<StudentDTO> getAllStudent = studentService.getAllStudent();
         for(StudentDTO student: getAllStudent) {
-            //Province province = student.getProvince();
-           // if(province.getId() == id)
+            if(student.getProvinceId() == id)
                 return true;
         }
         return false;
