@@ -16,6 +16,6 @@ public class Province {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name_province", nullable = false)
     private String name;
 }

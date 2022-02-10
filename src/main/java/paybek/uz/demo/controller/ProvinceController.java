@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import paybek.uz.demo.domain.Province;
 import paybek.uz.demo.service.ProvinceService;
+import paybek.uz.demo.service.dto.ProvinceDTO;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
 public class ProvinceController {
 
     private final static Logger log = LoggerFactory.getLogger(ProvinceController.class);
+
     private final ProvinceService provinceService;
 
     public ProvinceController(ProvinceService provinceService) {
@@ -23,24 +25,24 @@ public class ProvinceController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Province> createProvince(@Valid @RequestBody Province province) {
-        log.debug("Rest request to save province ; {}", province);
-        Province result = provinceService.save(province);
+    public ResponseEntity<ProvinceDTO> createProvince(@Valid @RequestBody ProvinceDTO provinceDTO) {
+        log.debug("Rest request to save province ; {}", provinceDTO);
+        ProvinceDTO result = provinceService.save(provinceDTO);
         return ResponseEntity.ok()
                 .body(result);
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<Province>> getAll() {
+    public ResponseEntity<List<ProvinceDTO>> getAll() {
         log.debug("Get All Province ");
         return ResponseEntity.ok()
                 .body(provinceService.getAllProvince());
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Province> update(@Valid @RequestBody Province province) {
-        log.debug("Update this Province : {}", province);
-        Province result = provinceService.update(province);
+    public ResponseEntity<ProvinceDTO> update(@Valid @RequestBody ProvinceDTO provinceDTO) {
+        log.debug("Update this Province : {}", provinceDTO);
+        ProvinceDTO result = provinceService.update(provinceDTO);
         return ResponseEntity.ok()
                 .body(result);
     }

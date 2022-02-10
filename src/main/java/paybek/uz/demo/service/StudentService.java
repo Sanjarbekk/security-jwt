@@ -6,9 +6,11 @@ import org.springframework.stereotype.Service;
 import paybek.uz.demo.domain.Student;
 import paybek.uz.demo.repository.StudentRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class StudentService {
 
     private final Logger log = LoggerFactory.getLogger(StudentService.class);
