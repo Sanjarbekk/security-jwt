@@ -11,7 +11,8 @@ import static paybek.uz.demo.security.ApplicationUserPermission.*;
 public enum ApplicationUserRole {
     STUDENT(Sets.newHashSet()),
     ADMIN(Sets.newHashSet(STUDENT_READ, STUDENT_WRITE, PROVINCE_READ, PROVINCE_WRITE)),
-    TRAINER      (Sets.newHashSet(STUDENT_READ, PROVINCE_READ));
+    TRAINER(Sets.newHashSet(STUDENT_READ, PROVINCE_READ)),
+    WRITER(Sets.newHashSet(STUDENT_WRITE, PROVINCE_WRITE));
 
     private final Set<ApplicationUserPermission> permissions;
 

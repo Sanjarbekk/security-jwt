@@ -2,19 +2,16 @@ package paybek.uz.demo.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
-import static paybek.uz.demo.security.ApplicationUserPermission.*;
 import static paybek.uz.demo.security.ApplicationUserRole.*;
 import static paybek.uz.demo.security.ApplicationUserRole.ADMIN;
 
@@ -70,10 +67,17 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorities(TRAINER.getGrantedAuthorities())
                 .build();
 
+        UserDetails userWR = User.builder()
+                .username("writer")
+                .password(passwordEncoder.encode("password"))
+                .authorities(WRITER.getGrantedAuthorities())
+                .build();
+
         return new InMemoryUserDetailsManager(
                 userA,
                 userSA,
-                userS
+                userS,
+                userWR
         );
     }
 }
